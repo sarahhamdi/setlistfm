@@ -1,44 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Qs from 'qs';
 import { app } from './api.js';
 
-// const Results = (props) => {
-//   return (
-//     <div className="results">
-//       <h2>Some Form Results</h2>
-//       <p>{props.name}</p>
-//     </div>
-//   )
-// }
 
-// class QueryForm extends React.Component {
-//   render() {
-//     return (
-//         <Results name="things" />
-//     )
-//   }
-// }
 
 class APICall extends React.Component {
+   
   constructor() {
     super();
     this.state = {
-      artistName: "",
-      concertDate: [],
-      setList: [],
+      artistName: "Taylor Swift",
+      concertDate: [0,1],
+      setList: []
     }
   }
-  componentDidmount() {
+  componentDidMount() {
     axios({
       method:'GET',
       url: 'http://proxy.hackeryou.com',
       dataResponse:'json',
-      paramsSerializer: function(params) {
+      paramsSerializer: (params) => {
         return Qs.stringify(params, {arrayFormat: 'brackets'})
       },
       params: {
-        reqUrl: `${app.baseURL}setlists`,
+        reqUrl: app.baseURL,
         params: {
           artistName: "Taylor Swift",
           sort: 'relevance'
@@ -51,71 +38,69 @@ class APICall extends React.Component {
       }
     }).then((res) => {
       console.log(res);
-      app.printAllInfo(res);
-      this.setState({artistName: res});
+      this.setState({setList: res.data.setlist});
+      console.log(this.state.setList)
     });
-    render() {
-      return (
-        <div>
-              <div>
-                <p>{this.state.artistName}</p>
-              </div>
-            
-        </div>
-      )
-    };
+  }
+  render() {
+    return (
+      <div>
+        <h1>SetlistFM</h1>
+        <h2>State - SetList:</h2>
+        <ul>
+          {this.state.setList.map((set, i) => {
+              return (
+                <li key={i}>{i} 
+                {set.sets.set[0].song[0].name}</li>
+              )
+          })}
+        </ul>
+        <h2>State - ConcertDate:  {this.state.concertDate}</h2>
+        <h2> State - Artists Name: {this.state.artistName}</h2>
+      </div>
+    )
   }
 }
 
 
-// class Counter extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       count: 0,
-//       featuredDonuts: ['plain', 'bannada', 'orange']
-//     }
-//     this.handleClick = this.handleClick.bind(this);
-//   }
-//   handleClick() {
-//     let counting = {count: this.state.count + 1};
-//     this.setState(counting)
-//   }
-//   render() {
-//     return (
-//       <div>
-//         <p>hello world. You are visitor {this.state.count}.</p>
-//         {this.state.featuredDonuts.map((selected) => {
-//           return <HelloAgain featuredDonuts={selected} />
-//         })}
-//         <button onClick={this.handleClick}>Click Me FOR REAL!!!</button>
-//       </div>
-//     )
-//   }
-// }
+class Form extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      artist: ""
+    }
+    this.handleChange = this.handleChange.bind(this); 
+    this.passUserChoiceToAPI = this.passUserChoiceToAPI.bind(this);
+    // when this component loads it is going to bind these methods to the app
+    // React only does this automatically for constructor and render
+    // have to manually do this for any function you create in a component
+  }
+  handleChange(e) {
+    this.setState({
+      artist: e.target.value
+    })
+  }
+  passUserChoiceToAPI(e) {
+    e.preventDefault();
+    console.log(this.state.artist)
+    // <APICall /> still need to figure this out
+  }
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.addTodo}>
+          <input type="test" name="artist" value={this.state.artist} onChange={this.handleChange}/>
+          <button onClick={this.passUserChoiceToAPI}>Add Todo</button>
+        </form>
+      </div>
+    )
+  }
+}
 
-// class HelloAgain extends React.Component {
-//   render() {
-//     return (
-//       <div className="hello" >
-//         <p >Your featured donut is {this.props.featuredDonuts}.</p>
-//       </div>
-//     )
-//   }
-// }
 
-// class Button extends React.Component {
-//   handleClick() {
-//     console.log("you clicked a button!");
-//   }
-//   render() {
-//     return (
-//       <button onClick={this.handleClick}> Click Me!!! </button>
-//     )
-//   }
-// }
-ReactDOM.render(<SetList />, document.getElementById('app'));
+ReactDOM.render(<Form />, document.getElementById('app'));
+ReactDOM.render(<APICall />, document.getElementById('api-call'))
 
-console.log('It works!');
+// console.log('It works!');
 
-app.APIRequest('Taylor Swift')
+// app.APIRequest('Taylor Swift')

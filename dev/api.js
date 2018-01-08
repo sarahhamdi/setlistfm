@@ -9,7 +9,7 @@ import Qs from 'qs';
 // ______________________________________
 
 const app = {};
-app.baseURL = 'https://api.setlist.fm/rest/1.0/search/';
+app.baseURL = 'https://api.setlist.fm/rest/1.0/search/setlists';
 app.key = '21b54f4a-0461-4989-918a-19d5df684129'
 
 app.APIRequest = (artistName) => {
@@ -21,7 +21,7 @@ app.APIRequest = (artistName) => {
       return Qs.stringify(params, {arrayFormat: 'brackets'})
     },
     params: {
-      reqUrl: `${app.baseURL}setlists`,
+      reqUrl: app.baseURL,
       params: {
         artistName: artistName,
         sort: 'relevance'
@@ -34,8 +34,8 @@ app.APIRequest = (artistName) => {
     }
   }).then((res) => {
     console.log(res);
-    app.printAllInfo(res);
-    this.setState({selectedSetList: res});
+    // app.printAllInfo(res);
+    // this.setState({setList: res.data.setlist[0].url});
   });
 }; 
 

@@ -42,7 +42,6 @@ class HelloAgain extends React.Component {
   }
 }
 
-
 class Button extends React.Component {
   handleClick() {
     console.log("you clicked a button!");
@@ -103,5 +102,68 @@ class Form extends React.Component {
   }
 }
 
+// const Results = (props) => {
+//   return (
+//     <div className="results">
+//       <h2>Some Form Results</h2>
+//       <p>{props.name}</p>
+//     </div>
+//   )
+// }
+
+// class QueryForm extends React.Component {
+//   render() {
+//     return (
+//         <Results name="things" />
+//     )
+//   }
+// }
+
+// class Counter extends React.Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       count: 0,
+//       featuredDonuts: ['plain', 'bannada', 'orange']
+//     }
+//     this.handleClick = this.handleClick.bind(this);
+//   }
+//   handleClick() {
+//     let counting = {count: this.state.count + 1};
+//     this.setState(counting)
+//   }
+//   render() {
+//     return (
+//       <div>
+//         <p>hello world. You are visitor {this.state.count}.</p>
+//         {this.state.featuredDonuts.map((selected) => {
+//           return <HelloAgain featuredDonuts={selected} />
+//         })}
+//         <button onClick={this.handleClick}>Click Me FOR REAL!!!</button>
+//       </div>
+//     )
+//   }
+// }
+
+// class HelloAgain extends React.Component {
+//   render() {
+//     return (
+//       <div className="hello" >
+//         <p >Your featured donut is {this.props.featuredDonuts}.</p>
+//       </div>
+//     )
+//   }
+// }
+
+// class Button extends React.Component {
+//   handleClick() {
+//     console.log("you clicked a button!");
+//   }
+//   render() {
+//     return (
+//       <button onClick={this.handleClick}> Click Me!!! </button>
+//     )
+//   }
+// }
 
 console.log('It works!');
