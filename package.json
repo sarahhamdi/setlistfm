@@ -14,6 +14,7 @@
     "babelify": "^8.0.0",
     "browser-sync": "^2.23.2",
     "browserify": "^14.5.0",
+    "connect-history-api-fallback": "^1.5.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-notify": "^3.0.0",
@@ -31,6 +32,7 @@
     "babel-preset-env": "^1.6.1",
     "graceful-fs": "^4.1.11",
     "minimatch": "^3.0.2",
+    "react-router-dom": "^4.2.2",
     "setlistfm-js": "^1.1.0"
   }
 }
