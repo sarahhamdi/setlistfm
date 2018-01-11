@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Qs from 'qs';
-import { app } from '../helpers/setListHelpers';
+import { helpers } from '../helpers/setListHelpers';
 import DisplayResults from './DisplayResults'
 
 class Home extends React.Component {
@@ -10,7 +10,7 @@ class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      artistName: "",
+      artist: "",
       concertDate: [0,1],
       setList: []
     }
@@ -36,13 +36,13 @@ class Home extends React.Component {
         return Qs.stringify(params, {arrayFormat: 'brackets'})
       },
       params: {
-        reqUrl: app.baseURL,
+        reqUrl: helpers.baseURL,
         params: {
           artistName: this.state.artist,
           sort: 'relevance'
         }, 
         proxyHeaders: {
-          'x-api-key': app.key,
+          'x-api-key': helpers.key,
           Accept: 'application/json',
         },
         xmlToJSON: false
@@ -50,6 +50,8 @@ class Home extends React.Component {
     }).then((res) => {
       console.log(res);
       this.setState({setList: res.data.setlist});
+      helpers.artistConcertDate(res);
+      
       console.log(this.state.setList)
       // this.passInfoToChild;
     });
@@ -59,9 +61,9 @@ class Home extends React.Component {
     // or onClick={this.makeAPICall} called on the Button element
     return (
       <div>
-        <form>
+        <form onSubmit={this.makeAPICall}>
           <input type="test" name="artist" value={this.state.artist} onChange={this.handleChange}/>
-          <button onClick={this.makeAPICall}>Submit</button>
+          <button>Submit</button>
         </form>
 
           
