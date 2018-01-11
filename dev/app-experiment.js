@@ -167,3 +167,15 @@ class Form extends React.Component {
 // }
 
 console.log('It works!');
+
+// <h2>State - SetList:</h2>
+// <ul>
+//   {this.state.setList.map((set, i) => {
+//       return (
+//         <li key={i}>{i} 
+//         {set.sets.set[0].song[0].name}</li>
+//         // need to turn this into a loop, see app.showAllSongs
+//       )
+//   })}
+// </ul>
+// <h2>State - ConcertDate:  {this.state.concertDate}</h2>

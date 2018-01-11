@@ -12,7 +12,7 @@ const historyApiFallback = require('connect-history-api-fallback');
 
 
 gulp.task('js', () => {
-  browserify('dev/app.js', {debug: true})
+  browserify('dev/scripts/app.js', {debug: true})
       .transform('babelify', {
           sourceMaps: true,
           presets: ['es2015','react']
