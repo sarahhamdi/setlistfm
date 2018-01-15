@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700");
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
   display: block; }
 
@@ -148,12 +148,15 @@ body {
   font-size: 1.6rem; }
 
 h1 {
-  color: purple; }
+  color: #2e002e;
+  font-size: 48px;
+  font-size: 4.8rem; }
 
 .results {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around; }
+  justify-content: space-around;
+  margin-top: 30px; }
 
 .event-artist {
   width: 100%; }
@@ -163,11 +166,55 @@ h1 {
   box-shadow: 0 11px 16px 0 rgba(0, 0, 0, 0.041);
   display: inline-block;
   margin: 10px;
-  padding: 20px;
-  width: 30%; }
+  width: 300px; }
+
+.event-details {
+  background: #f5f5f5;
+  padding: 10px;
+  margin: 0;
+  padding: 20px; }
+
+.event-venue {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 10px; }
 
 .event-setlist {
+  padding: 20px; }
+
+.event-setlist-list {
   list-style: none;
   padding: 0 0 0 5px; }
-  .event-setlist-song {
+  .event-setlist-list-song {
     margin: 10px; }
+
+input {
+  width: 70%;
+  margin-right: 20px;
+  padding: 8px 8px 8px 14px; }
+
+button {
+  background: #f75b6a;
+  width: calc(30% - 20px);
+  border: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding: 10px;
+  color: white;
+  letter-spacing: 1px; }
+
+.google-map {
+  margin-top: 50px;
+  height: 300px;
+  width: 100%; }
+
+.google-map-marker {
+  position: 'relative';
+  color: 'white';
+  background: 'red';
+  height: 400;
+  width: 600;
+  top: -20;
+  left: -30; }

@@ -9,11 +9,32 @@ import Qs from 'qs';
 // ______________________________________
 
 const helpers = {};
-helpers.baseURL = 'https://api.setlist.fm/rest/1.0/search/setlists';
-helpers.key = '21b54f4a-0461-4989-918a-19d5df684129'
 
-helpers.APIRequest = (artistName) => {
-  axios({
+// setistFM
+helpers.baseURL = 'https://api.setlist.fm/rest/1.0/search/setlists';
+helpers.key = '21b54f4a-0461-4989-918a-19d5df684129';
+
+// google maps 
+helpers.GMkey = 'AIzaSyA8IxNPUCISkrKCpWjWbNKKdkD5NfsfNwc';
+helpers.labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+helpers.locations = [
+  {lat: -31.563910, lng: 147.154312},
+  {lat: -33.718244, lng: 150.363181},
+]
+helpers.markers = () => {
+  helpers.locations.map((location, i) => {
+    return new google.maps.Marker({
+      position: location,
+      label: helpers.labels[i % helpers.labels.length]
+    });
+  });
+} 
+// helpers.markerCluster = new MarkerClusterer(map, helpers.markers,
+//     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+// setlist api call
+helpers.getSetListData = (artistName) => {
+  return axios({
     method:'GET',
     url: 'http://proxy.hackeryou.com',
     dataResponse:'json',
@@ -21,22 +42,18 @@ helpers.APIRequest = (artistName) => {
       return Qs.stringify(params, {arrayFormat: 'brackets'})
     },
     params: {
-      reqUrl: app.baseURL,
+      reqUrl: helpers.baseURL,
       params: {
         artistName: artistName,
         sort: 'relevance'
       }, 
       proxyHeaders: {
-        'x-api-key': app.key,
+        'x-api-key': helpers.key,
         Accept: 'application/json',
       },
       xmlToJSON: false
     }
-  }).then((res) => {
-    console.log(res);
-    // app.printAllInfo(res);
-    // this.setState({setList: res.data.setlist[0].url});
-  });
+  })
 }; 
 
 // ______________________________________
@@ -101,7 +118,8 @@ helpers.dateCompare = (set, concertDate, todaysDate) => {
 } 
 
 //fn to get coords for venue
-helpers.venueCoords = (set) => {
+helpers.venueCoords = (res) => {
+
   const venueLatLong = set.venue.city.coords;
   return venueLatLong;
 }

@@ -30,6 +30,7 @@
     "axios": "^0.17.1",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "google-map-react": "^0.27.0",
     "graceful-fs": "^4.1.11",
     "minimatch": "^3.0.2",
     "react-router-dom": "^4.2.2",
